@@ -33,7 +33,11 @@ enable_language(C ASM)
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME}
-        Core/Src/freertos.c)
+        UserCode/Inc/user_tasks.h
+        UserCode/Src/user_tasks.cpp
+        Core/Src/freertos.c
+        UserCode/Inc/user_tasks.h
+        UserCode/Src/user_tasks.cpp)
 
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
@@ -45,12 +49,14 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user sources here
+        # Add user sources here
+        UserCode/Src
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+        UserCode/Inc
 )
 
 # Add project symbols (macros)
